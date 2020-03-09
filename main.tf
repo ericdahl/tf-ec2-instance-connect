@@ -7,7 +7,6 @@ module "vpc" {
   admin_ip_cidr = "${var.admin_cidr}"
 }
 
-
 data "aws_ami" "amazon_linux_2" {
   most_recent = true
 
@@ -18,7 +17,6 @@ data "aws_ami" "amazon_linux_2" {
     values = ["amazon"]
   }
 
-
   filter {
     name   = "name"
     values = ["amzn2-ami-hvm*"]
@@ -26,7 +24,7 @@ data "aws_ami" "amazon_linux_2" {
 }
 
 resource "aws_iam_role" "ec2_role" {
-  name        = "instance-role"
+  name = "instance-role"
 
   assume_role_policy = <<EOF
 {
@@ -71,7 +69,7 @@ EOF
 }
 
 resource "aws_iam_instance_profile" "default" {
-  name       = "${var.name}-instance-profile"
+  name = "${var.name}-instance-profile"
   role = "${aws_iam_role.ec2_role.name}"
 }
 
